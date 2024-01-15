@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form</title>
-    <script src="login.js" defer></script>
     <link rel="stylesheet" href="login.css">
 </head>
 <body>
@@ -17,6 +16,29 @@
         </form>
     </div>
 
+    <div id="register-form">
+        <form action="index.html" style="padding: 0px;">
+            <table cellpadding="3">
+                <tr>
+                    <td colspan="2" align="center"><span id="norm">Enter your Details</span></td>
+                </tr>
+                <tr>
+                    <td><label for="uname">Username</label></td>
+                    <td><input type="text" name="uname" id="uname"></td>
+                </tr>
+                <tr>
+                    <td><label for="pswd">Password</label></td>
+                    <td><input type="password" name="pswd" id="pswd"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"><input type="submit" value="Sign in"></td>
+                </tr>
+            </table>
+
+        </form>
+        <span id="create2">Don't have an account? <u><i>register</i></u></span>
+    </div>
+    <script src="login.js"></script>
 </body>
 
 </html>
