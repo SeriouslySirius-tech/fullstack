@@ -4,7 +4,9 @@ body {
     /* background-repeat: no-repeat; */
     background-size:cover;
 }
-
+/* span{
+    color: #00ffff;
+} */
 div#form-group,#register-form {
     background-color: rgba(24, 20, 18, 0.834);
     border-radius: 10px;
