@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
             label1.innerHTML = "Enter your name";
             const namein = document.createElement("input");
             
-            span_id.innerHTML="Already have an account?Click <i><u>here</u></i>"
+            span_id.innerHTML='Already have an account?Click <i class="here">here</i>';
             span_id.id="create"
             
             const brr=document.createElement("br");

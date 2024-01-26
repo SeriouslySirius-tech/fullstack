@@ -79,4 +79,9 @@ button:hover{
     color: #8492AF;
     font-family:monospace;
     cursor: pointer;
+    color: #f0ffff
+}
+
+.here:hover{
+    text-decoration: underline;
 }
