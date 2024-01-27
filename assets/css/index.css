@@ -1,3 +1,50 @@
+* {
+    transition: 0.1s all ease-in-out;
+}
+
+.intro {
+    position: fixed;
+    z-index: 99;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 1000vh;
+    background-color: black;
+    color: white;
+    transition: 1s;
+}
+
+.logoHeader {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    z-index: 2;
+    font-size: 50px;
+}
+
+.logo {
+    position: relative;
+    display: inline-block;
+    opacity: 0;
+    color: white;
+    bottom: -20px !important;
+}
+
+.logo.active {
+    bottom: 0 !important;
+    opacity: 1;
+    transition: ease-in-out .5s;
+}
+
+.logo.fade {
+    bottom: 20px !important;
+    opacity: 0;
+    transition: ease-in-out .5s;
+}
+
+
 body {
     background-color: #121212;
     font-family: 'Poppins', sans-serif;
@@ -35,7 +82,7 @@ header:hover {
     transform: scale(1.02);
 }
 
-.logo {
+.logo2 {
     font-size: 2rem;
     font-weight: bold;
     cursor: pointer;
@@ -44,10 +91,14 @@ header:hover {
     transition: color 0.3s, transform 0.3s;
 }
 
-.logo:hover {
+.logo2:hover {
+    font-size: 1.95rem;
     color: #ea4335;
 }
 
+.logo2:active{
+    font-size: 1.9rem;
+}
 nav ul {
     list-style: none;
     display: flex;
