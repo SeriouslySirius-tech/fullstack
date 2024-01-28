@@ -1,9 +1,11 @@
 import pymysql
 import os
 
+pas=os.getenv("db_pswd")
+
 class DBManager:
     def __init__(self):
-        self.conn = pymysql.connect(host="localhost", user="root", password=os.getenv("db_pswd"), database="flashfleet")
+        self.conn = pymysql.connect(host="localhost", user="root", password=pas, database="flashfleet")
         self.cursor = self.conn.cursor()
 
     def say_hello(self):

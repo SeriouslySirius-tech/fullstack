@@ -11,12 +11,12 @@ def signup():
         name = request.form.get("name")
         uname = request.form.get("uname")
         pswd = request.form.get("pswd")
-        print(request.form)
-        print(name, uname, pswd)
-        # db.say_hello()
-        # db.add_user(name, uname, pswd)
+        print("Check:",request.form)
+        print("Test:",name, uname, pswd)
+        db.say_hello()
+        db.add_user(name, uname, pswd)
         # db.show_users()
-        return redirect(url_for('index'))
+        return redirect(url_for('index',aname=name))
     return render_template("login.html")
 
 @app.route('/login', methods =["GET", "POST"])
@@ -33,7 +33,8 @@ def login():
 
 @app.route("/index")
 def index():
-    return render_template("index.html")
+    aname = request.args.get("aname")
+    return render_template("index.html",aname=aname)
 # @app.route("/flash")
 # def flashcards():
 #     return render_template("flash.html")

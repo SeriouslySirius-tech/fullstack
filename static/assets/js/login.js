@@ -118,6 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
             label3.for = "pswd";
             label3.innerHTML = "Enter your password";
             const mailin = document.createElement("input");
+            mailin.name="pswd";
             mailin.type = "password";
             mailin.placeholder = "Password";
     
