@@ -1,16 +1,13 @@
-from flask import Flask, render_template, redirect, url_for, request, session
+from flask import Flask, jsonify, render_template, redirect, url_for, request, session
 from officialmodel import BardGenerator
 from flask_session import Session
 import datetime
 
-# import databasemanagement as database
-
 app = Flask(__name__)
 app.secret_key = "BADKEY"
 app.config['SESSION_TYPE'] = 'filesystem'
-app.config['PERMANENT_SESSION_LIFETIME'] = datetime.timedelta(minutes=10)   
+app.config['PERMANENT_SESSION_LIFETIME'] = datetime.timedelta(minutes=2)   
 Session(app)
-
 
 def go_to_login():
     if "uname" not in session or not session.get("uname"):
@@ -26,7 +23,7 @@ def signup():
         session["pswd"] = request.form.get("pswd")
         # db.show_users()
         return redirect(url_for('index'))
-    print()
+    # print()
     return render_template("login.html")
 
 @app.route('/login', methods =["GET", "POST"])
@@ -52,17 +49,23 @@ def timer():
         return redirect(url_for('login'))
     return render_template("pomo.html")
 
-@app.route("/quiz")
-def quiz():
-    if go_to_login():
-        return redirect(url_for('login'))
-    return render_template("quiz.html")
+# @app.route("/quiz")
+# def quiz():
+#     if go_to_login():
+#         return redirect(url_for('login'))
+#     return render_template("quiz.html")
 
 @app.route("/flash")
 def flash():
     if go_to_login():
         return redirect(url_for('login'))
     return render_template("flash.html")
+
+# @app.route("/api/model")
+# def generate_questions():
+#     model = BardGenerator()
+#     model.generate_questions_from_text_mcq(topic=)
+
 # @app.route("/flash")
 # def flashcards():
 #     return render_template("flash.html")
@@ -70,5 +73,20 @@ def flash():
 # @app.route("/<username>/flash/direct")
 # def generate_question(topic):
 #     pass
+
+@app.route("/quiz", methods=["GET", "POST"])
+def quiz():
+    # if go_to_login():
+    #     return redirect(url_for('login'))
+    questions = get_questions()
+    return render_template("quiztemp.html", questions=questions)
+
+
+@app.route('/api/get_questions')
+def get_questions():
+    bard = BardGenerator() 
+    bard.generate_questions_from_text_mcq("Memory Structure and Architecture")
+    questions = bard.questions
+    return questions
 if __name__=='__main__':
    app.run(debug=True)  
