@@ -4,6 +4,7 @@ from flask_session import Session
 import datetime
 
 # import databasemanagement as database
+#Adding something else here
 
 app = Flask(__name__)
 app.secret_key = "BADKEY"
