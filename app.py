@@ -83,33 +83,12 @@ def quizform():
         difficulty = request.form.get("difficulty")
         bard.generate_questions_from_text_mcq(topic, difficulty)
         questions = bard.questions
+        print(questions)
         return render_template("quiztemp.html", questions=questions)
 
     return render_template("quizform.html")
 
 
-@app.route('/get_questions', methods=["POST"])
-def get_questions():
-    if go_to_login():
-        return redirect(url_for('login'))
-
-    if request.method == "POST":
-        try:
-            num_questions = 5
-            bard = BardGenerator()
-            topic = request.form.get("topic")
-            difficulty = request.form.get("difficulty")
-
-            questions = []
-            for _ in range(num_questions):
-                bard.generate_questions_from_text_mcq(topic, difficulty)
-                questions.append(bard.questions)
-
-            return jsonify({"questions": questions})
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
-
-    return render_template("quizform.html")
 
 if __name__ == '__main__':
     app.run(debug=True)

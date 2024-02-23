@@ -1,0 +1,24 @@
+<!-- quizform.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Form</title>
+    <!-- Add your styles or link external CSS files here -->
+</head>
+
+<body>
+    <h1>Quiz Form</h1>
+    <form id="quizForm" action="{{ url_for('quizform') }}" method="POST"> 
+        <label for="topic">Topic:</label>
+        <input type="text" name="topic" id="topic" required>
+        <br>
+        <label for="difficulty">Difficulty:</label>
+        <input type="text" name="difficulty" id="difficulty" required>
+        <br>
+        <input type="submit" value="Generate Quiz">
+</body>
+
+</html>

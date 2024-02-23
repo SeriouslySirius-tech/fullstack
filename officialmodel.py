@@ -39,7 +39,7 @@ class BardGenerator:
     
 # bard = BardGenerator() 
 # # # bard.generate_questions_from_text_single_word("Memory Structure and Architecture")
-# bard.generate_questions_from_text_mcq("Memory Structure and Architecture")
+# bard.generate_questions_from_text_mcq("Formula one racing history")
 # print("\n", bard.questions)
 
     
