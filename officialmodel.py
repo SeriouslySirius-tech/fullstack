@@ -5,7 +5,7 @@ import flask
 
 class BardGenerator:
     def __init__(self):
-        genai.configure(api_key=os.getenv("API_KEY"))
+        genai.configure(api_key="AIzaSyAplxTGM7nlWUplp86mQbiPJvCVZBCpgZM")
         self.text_model = genai.GenerativeModel("gemini-pro")
         self.image_model = genai.GenerativeModel("gemini-pro-vision")
         self.questions = {}
