@@ -18,7 +18,7 @@ class BardGenerator:
         question = question.replace("*", ''); answer = answer.replace("*", ''); options = options.replace('*', '')
         question = question.replace("\n", ''); answer = answer.replace('\n', ''); # options = options.replace("\n", ' ')
         question = question.strip(); answer = answer.strip()
-        print(question, options, answer, sep="\n")
+        # print(question, options, answer, sep="\n")
         self.questions["Question"] = question
         self.questions['Options'] = options
         self.questions["Answer"] = answer

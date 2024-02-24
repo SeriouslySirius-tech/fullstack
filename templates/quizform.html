@@ -11,7 +11,7 @@
 
 <body>
     <h1>Quiz Form</h1>
-    <form id="quizForm" action="{{ url_for('quizform') }}" method="POST"> 
+    <form id="quizForm" action="{{ url_for('quiz') }}" method="POST"> 
         <label for="topic">Topic:</label>
         <input type="text" name="topic" id="topic" required>
         <br>
@@ -19,6 +19,7 @@
         <input type="text" name="difficulty" id="difficulty" required>
         <br>
         <input type="submit" value="Generate Quiz">
+    </form>
 </body>
 
 </html>

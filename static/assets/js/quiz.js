@@ -66,5 +66,5 @@ window.addEventListener("DOMContentLoaded", ()=>{
         updateQuestion();
       }, 250); // Wait for half of the flip animation before updating content
     }
-
+    
     updateQuestion(); // Initialize with the first question

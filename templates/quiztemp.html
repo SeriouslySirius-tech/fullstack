@@ -5,18 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <div>
         <h2 id="question">{{ questions["Question"] }}</h2>
         <div id="options">
             <table>
                 {% for option in questions["Options"].split("\n") %}
-                  <tr>
+                    <tr>
                     <td>{{ option }}</td>
-                  </tr>
+                    </tr>
                 {% endfor %}
-              </table>
+                </table>
         </div>
     </div>
+    <br>
+    <!-- Add Next and Previous buttons -->
+    <form action="{{ url_for('quiztemp') }}" method="GET">
+        <input type="hidden" name="topic" value="{{ request.args.get('topic') }}">
+        <input type="hidden" name="difficulty" value="{{ request.args.get('difficulty') }}">
+        <input type="submit" name="action" value="Previous">
+        <input type="submit" name="action" value="Next">
+    </form>
 </body>
+
 </html>
