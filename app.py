@@ -10,7 +10,7 @@ app.config['SESSION_TYPE'] = 'filesystem'
 app.config['PERMANENT_SESSION_LIFETIME'] = datetime.timedelta(minutes=2)
 Session(app)
 
-isYadla=True
+isYadla=False
 
 def go_to_login():
     if(isYadla):
@@ -64,6 +64,11 @@ def quizform():
         return redirect(url_for('login'))
     return render_template("quizform.html")
 
+# @app.route("/")
+# def first():
+#     return redirect(url_for('quiztemp', topic="one piece manga", difficulty="hard"))
+
+
 @app.route('/generate_quiz', methods=["POST"])
 def generate_quiz():
     topic = request.form.get("topic")
@@ -103,7 +108,7 @@ def quiztemp():
     # Call the API endpoint to get questions based on the provided topic and difficulty
     response = requests.post('http://127.0.0.1:5000/generate_quiz', data={"topic": topic, "difficulty": difficulty})
     questions = response.json()
-
+    print(questions)
     return render_template("quiztemp.html", questions=questions)
 
 
