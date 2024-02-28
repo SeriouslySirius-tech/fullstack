@@ -10,7 +10,7 @@ app.config['SESSION_TYPE'] = 'filesystem'
 app.config['PERMANENT_SESSION_LIFETIME'] = datetime.timedelta(minutes=2)
 Session(app)
 
-isYadla=False
+isYadla=True
 
 def go_to_login():
     if(isYadla):
@@ -67,6 +67,10 @@ def quizform():
 # @app.route("/")
 # def first():
 #     return redirect(url_for('quiztemp', topic="one piece manga", difficulty="hard"))
+
+# @app.route("/")
+# def first():
+#     return render_template("quizform.html")
 
 
 @app.route('/generate_quiz', methods=["POST"])
