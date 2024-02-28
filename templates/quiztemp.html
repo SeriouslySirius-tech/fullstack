@@ -6,12 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/static/assets/css/quiztemp.css">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">    
+    <style>
+        #question{
+            font-family: 'Raleway';
+            font-size: 1.4em;
+            letter-spacing: 2px;
+        }
+    </style>
 </head>
 
 <body>
     <div id="quizContainer">
-        <h2 id="question">{{ questions["Question"] }}</h2>
+        <span id="question">{{ questions["Question"] }}</span>
         <form id="quizForm" action="{{ url_for('quiztemp') }}" method="GET">
             <input type="hidden" name="topic" value="{{ request.args.get('topic') }}">
             <input type="hidden" name="difficulty" value="{{ request.args.get('difficulty') }}">

@@ -68,10 +68,6 @@ def quizform():
 # def first():
 #     return redirect(url_for('quiztemp', topic="one piece manga", difficulty="hard"))
 
-# @app.route("/")
-# def first():
-#     return render_template("quizform.html")
-
 
 @app.route('/generate_quiz', methods=["POST"])
 def generate_quiz():
@@ -116,6 +112,11 @@ def quiztemp():
     return render_template("quiztemp.html", questions=questions)
 
 
+@app.route('/signout')
+def signout():
+    # Clear the session data
+    session.clear()
+    return redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.run(debug=True)
