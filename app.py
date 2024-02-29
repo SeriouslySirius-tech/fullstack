@@ -10,10 +10,10 @@ app.config['SESSION_TYPE'] = 'filesystem'
 app.config['PERMANENT_SESSION_LIFETIME'] = datetime.timedelta(minutes=2)
 Session(app)
 
-isYadla=True
+debug_login=False
 
 def go_to_login():
-    if(isYadla):
+    if(debug_login):
         return False
     if "uname" not in session or not session.get("uname"):
         return True
@@ -27,7 +27,7 @@ def signup():
         session["uname"] = request.form.get("uname")
         session["pswd"] = request.form.get("pswd")
         return redirect(url_for('index'))
-    if(isYadla):
+    if(debug_login):
         return render_template("index.html")
     return render_template("login.html")
 
@@ -108,7 +108,7 @@ def quiztemp():
     # Call the API endpoint to get questions based on the provided topic and difficulty
     response = requests.post('http://127.0.0.1:5000/generate_quiz', data={"topic": topic, "difficulty": difficulty})
     questions = response.json()
-    print(questions)
+    # print(questions)
     return render_template("quiztemp.html", questions=questions)
 
 
