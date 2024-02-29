@@ -3,18 +3,20 @@ from officialmodel import BardGenerator
 from flask_session import Session
 import datetime
 import requests
+from pymongo import MongoClient
+
+client = MongoClient('localhost', 27017)
+
+db = client.flask_db
+users = db.users
 
 app = Flask(__name__)
 app.secret_key = "BADKEY"
 app.config['SESSION_TYPE'] = 'filesystem'
-app.config['PERMANENT_SESSION_LIFETIME'] = datetime.timedelta(minutes=2)
+app.config['PERMANENT_SESSION_LIFETIME'] = datetime.timedelta(minutes=5)
 Session(app)
 
-debug_login=False
-
 def go_to_login():
-    if(debug_login):
-        return False
     if "uname" not in session or not session.get("uname"):
         return True
     else:
@@ -23,21 +25,29 @@ def go_to_login():
 @app.route('/', methods=["GET", "POST"])
 def signup():
     if request.method == "POST":
-        session["name"] = request.form.get("name")
-        session["uname"] = request.form.get("uname")
-        session["pswd"] = request.form.get("pswd")
-        return redirect(url_for('index'))
-    if(debug_login):
-        return render_template("index.html")
+        session["name"] = str(request.form.get("name")).strip()
+        session["uname"] = str(request.form.get("uname")).strip()
+        session["pswd"] = str(request.form.get("pswd")).strip()
+        existing_user = users.find_one({"uname": session["uname"]})
+        if existing_user:
+            return redirect(url_for('signup'))
+        users.insert_one({"name": session["name"], "uname": session["uname"], "pswd": session["pswd"]})
+        return render_template("index.html", name=session["name"])
     return render_template("login.html")
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        session["uname"] = request.form.get("uname")
-        session["pswd"] = request.form.get("pswd")
-        if session["uname"] == "username" and session["pswd"] == "password":
-            return redirect(url_for('index'))
+        session["uname"] = str(request.form.get("uname")).strip()
+        session["pswd"] = str(request.form.get("pswd")).strip()
+        existing_user = users.find_one({"uname": session["uname"], "pswd": session["pswd"]})
+        if not existing_user:
+            return redirect(url_for('signup'))
+        if existing_user:
+                name = users.find_one({"uname": session["uname"], "pswd": session["pswd"]}, {"name":1, "_id":0})["name"]
+                return render_template("index.html", name=name)
+        # if session["uname"] :
+        #     return redirect(url_for('index'))
     return render_template("login.html")
 
 @app.route("/index")
@@ -63,11 +73,6 @@ def quizform():
     if go_to_login():
         return redirect(url_for('login'))
     return render_template("quizform.html")
-
-# @app.route("/")
-# def first():
-#     return redirect(url_for('quiztemp', topic="one piece manga", difficulty="hard"))
-
 
 @app.route('/generate_quiz', methods=["POST"])
 def generate_quiz():
@@ -107,16 +112,12 @@ def quiztemp():
 
     # Call the API endpoint to get questions based on the provided topic and difficulty
     response = requests.post('http://127.0.0.1:5000/generate_quiz', data={"topic": topic, "difficulty": difficulty})
+    print(response)
     questions = response.json()
-    # print(questions)
+
     return render_template("quiztemp.html", questions=questions)
 
 
-@app.route('/signout')
-def signout():
-    # Clear the session data
-    session.clear()
-    return redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.run(debug=True)
